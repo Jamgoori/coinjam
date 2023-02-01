@@ -13,20 +13,22 @@ const Coinpage = () => {
     });
   }, [url]);
   return (
-    <>
-      <div>
-        <img src={coin.image?.large} />
+    <div className="rounded-div my-12 py-8">
+      <div className="flex py-8">
+        <img className="w-20 mr-8" src={coin.image?.large} />
         <div>
-          <p>{coin?.name} price</p>
+          <p className="text-3xl font-bold">{coin?.name}</p>
           <p>({coin.symbol?.toUpperCase()} / KRW)</p>
         </div>
       </div>
 
-      <div>
+      <div className="grid md:grid-cols-2 gap-8">
         <div>
-          <div>
+          <div className="flex justify-between">
             {coin.market_data?.current_price ? (
-              <p>₩ {coin.market_data.current_price.krw.toLocaleString()}</p>
+              <p className="text-3xl font-bold">
+                ₩ {coin.market_data.current_price.krw.toLocaleString()}
+              </p>
             ) : null}
             <p>7일</p>
           </div>
@@ -35,30 +37,30 @@ const Coinpage = () => {
               <SparklinesLine color="teal" />
             </Sparklines>
           </div>
-          <div>
+          <div className="flex justify-between py-4">
             <div>
-              <p>시가 총액</p>
+              <p className="text-gray-500 text-sm">시가 총액</p>
               {coin.market_data?.market_cap ? (
                 <p>₩ {coin.market_data.market_cap.krw.toLocaleString()}</p>
               ) : null}
             </div>
             <div>
-              <p>거래량 (24h)</p>
+              <p className="text-gray-500 text-sm">거래량 (24h)</p>
               {coin.market_data?.market_cap ? (
                 <p>₩ {coin.market_data.total_volume.krw.toLocaleString()}</p>
               ) : null}
             </div>
           </div>
 
-          <div>
+          <div className="flex justify-between py-4">
             <div>
-              <p>24h 최고가</p>
+              <p className="text-gray-500 text-sm">24h 최고가</p>
               {coin.market_data?.high_24h ? (
                 <p>₩ {coin.market_data.high_24h.krw.toLocaleString()}</p>
               ) : null}
             </div>
             <div>
-              <p>24h 최저가</p>
+              <p className="text-gray-500 text-sm">24h 최저가</p>
               {coin.market_data?.low_24h ? (
                 <p>₩ {coin.market_data.low_24h.krw.toLocaleString()}</p>
               ) : null}
@@ -67,23 +69,21 @@ const Coinpage = () => {
         </div>
 
         <div>
-          <p>Market Stats</p>
-          <div>
+          <p className="text-xl font-bold">시장 상황</p>
+          <div className="flex justify-between py-4">
             <div>
-              <p>Rank</p>#{coin.market_cap_rank}
+              <p className="text-gray-500 text-sm">Rank</p>#
+              {coin.market_cap_rank}
             </div>
+
             <div>
-              <p>Hashing Algorithm</p>
-              {coin.hashing_algorithm ? <p>{coin.hashing_algorithm}</p> : null}
-            </div>
-            <div>
-              <p>신뢰 점수</p>
+              <p className="text-gray-500 text-sm">유동성</p>
               {coin.tickers ? <p>{coin.liquidity_score.toFixed(2)}</p> : null}
             </div>
           </div>
-          <div>
+          <div className="flex justify-between py-4">
             <div>
-              <p>가격 변동(24h)</p>
+              <p className="text-gray-500 text-sm">가격 변동(24h)</p>
               {coin.market_data ? (
                 <p>
                   {coin.market_data.price_change_percentage_24h.toFixed(2)}%
@@ -91,14 +91,14 @@ const Coinpage = () => {
               ) : null}
             </div>
             <div>
-              <p>가격 변동(7d)</p>
+              <p className="text-gray-500 text-sm">가격 변동(7d)</p>
               {coin.market_data ? (
                 <p>{coin.market_data.price_change_percentage_7d.toFixed(2)}%</p>
               ) : null}
             </div>
 
             <div>
-              <p>가격 변동(14d)</p>
+              <p className="text-gray-500 text-sm">가격 변동(14d)</p>
               {coin.market_data ? (
                 <p>
                   {coin.market_data.price_change_percentage_14d.toFixed(2)}%
@@ -107,9 +107,9 @@ const Coinpage = () => {
             </div>
           </div>
 
-          <div>
+          <div className="flex justify-between py-4">
             <div>
-              <p>가격 변동(30d)</p>
+              <p className="text-gray-500 text-sm">가격 변동(30d)</p>
               {coin.market_data ? (
                 <p>
                   {coin.market_data.price_change_percentage_30d.toFixed(2)}%
@@ -118,7 +118,7 @@ const Coinpage = () => {
             </div>
 
             <div>
-              <p>가격 변동(60d)</p>
+              <p className="text-gray-500 text-sm">가격 변동(60d)</p>
               {coin.market_data ? (
                 <p>
                   {coin.market_data.price_change_percentage_60d.toFixed(2)}%
@@ -127,13 +127,13 @@ const Coinpage = () => {
             </div>
 
             <div>
-              <p>가격 변동(1y)</p>
+              <p className="text-gray-500 text-sm">가격 변동(1y)</p>
               {coin.market_data ? (
                 <p>{coin.market_data.price_change_percentage_1y.toFixed(2)}%</p>
               ) : null}
             </div>
           </div>
-          <div>
+          <div className="flex justify-around p-8 text-accent">
             <FaTwitter />
             <FaFacebook />
             <FaTelegram />
@@ -143,8 +143,8 @@ const Coinpage = () => {
       </div>
 
       {/* 설명 */}
-      <div>
-        <p>About {coin.name}</p>
+      <div className="py-4">
+        <p className="text-xl font-bold">About {coin.name}</p>
         <p
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(
@@ -153,7 +153,7 @@ const Coinpage = () => {
           }}
         ></p>
       </div>
-    </>
+    </div>
   );
 };
 
