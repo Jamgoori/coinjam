@@ -9,12 +9,12 @@ const SavedCoin = () => {
   const { user } = UserAuth();
 
   useEffect(() => {
-    onSnapshot(doc(db, "users", `${user.email}`), (doc) => {
+    onSnapshot(doc(db, "users", `${user?.email}`), (doc) => {
       setCoins(doc.data()?.watchList);
     });
-  }, [user.email]);
+  }, [user?.email]);
 
-  const coinPath = doc(db, "users", `${user.email}`);
+  const coinPath = doc(db, "users", `${user?.email}`);
   const deleteCoin = async (passedid) => {
     try {
       const result = coins.filter((item) => item.id !== passedid);
@@ -27,7 +27,7 @@ const SavedCoin = () => {
   };
   return (
     <div>
-      {coins.length === 0 ? (
+      {coins?.length === 0 ? (
         <p>
           저장된 코인이 없습니다. 관심 리스트에 코인을 추가하세요.{" "}
           <Link to="/">추가하러 가기</Link>
@@ -42,7 +42,7 @@ const SavedCoin = () => {
             </tr>
           </thead>
           <tbody>
-            {coins.map((coin) => (
+            {coins?.map((coin) => (
               <tr key={coin.id} className="h-[60px] overflow-hidden">
                 <td>{coin?.rank}</td>
                 <td>

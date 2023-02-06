@@ -58,11 +58,11 @@ const Navbar = () => {
         }
       >
         <ul className="w-full p-4">
-          <li className="py-6 border-b">
+          <li onClick={handleNav} className="py-6 border-b">
             <Link to="/">홈페이지</Link>
           </li>
-          <li className="py-6 border-b">
-            <Link to="/">계정</Link>
+          <li onClick={handleNav} className="py-6 border-b">
+            <Link to="/account">계정</Link>
           </li>
           <li className="py-6 border-b">
             <ThemeToggle />
@@ -70,11 +70,14 @@ const Navbar = () => {
         </ul>
         <div className="flex flex-col w-full p-4">
           <Link to="/signin">
-            <button className="w-full p-3 my-2 border shadow-xl bg-primary text-primary border-secondary rounded-2xl">
+            <button
+              onClick={handleNav}
+              className="w-full p-3 my-2 border shadow-xl bg-primary text-primary border-secondary rounded-2xl"
+            >
               로그인
             </button>
           </Link>
-          <Link to="/signup">
+          <Link onClick={handleNav} to="/signup">
             <button>회원가입</button>
           </Link>
         </div>
