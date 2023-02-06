@@ -1,18 +1,33 @@
+import { async } from "@firebase/util";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import SavedCoin from "../components/SavedCoin";
-
+import { UserAuth } from "../context/AuthContext";
 const Account = () => {
+  const { user, logout } = UserAuth();
+  const navigate = useNavigate();
+  const handleSignOut = async () => {
+    try {
+      await logout();
+      navigate("/");
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
   return (
     <div className="max-w-[1140px] mx-auto">
       <div className="flex items-center justify-between py-8 my-12 rounded-div">
         <div>
           <h1 className="text-2xl font-bold">계정</h1>
           <div>
-            <p>안녕하세요</p>
+            <p>안녕하세요, {user?.email}</p>
           </div>
         </div>
         <div>
-          <button className="px-6 py-2 border shadow-lg rounded-2xl hover:shadow-2xl">
+          <button
+            onClick={handleSignOut}
+            className="px-6 py-2 border shadow-lg rounded-2xl hover:shadow-2xl"
+          >
             로그아웃
           </button>
         </div>
