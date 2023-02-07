@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# 프로젝트 소개 🙂
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+리액트와 파이어베이스로 구현한 코인정보 플랫폼입니다.
+<br>
+** 코인잼(ver 1.0) 보러가기 -> https://coinjam-5d97f.web.app/ **
+<br>
 
-## Available Scripts
+## 기술 스택 🛠
 
-In the project directory, you can run:
+- React
+- Tailwind
+- Firebase
 
-### `npm start`
+  <br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 코인잼 💸
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<img width="800" alt="클래스다이어그램" src="https://user-images.githubusercontent.com/98381294/217152319-2db7b938-3fbb-440e-8b57-0e1ea09c4089.gif">
 
-### `npm test`
+<br>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 구현기능 🦾
 
-### `npm run build`
+|                                                             다크모드                                                              |                                                                   코인 검색                                                                   |
+| :---------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------: |
+| ![다크모드 시연](https://user-images.githubusercontent.com/98381294/217151401-9dbc9033-d466-4a8d-8c74-88ddf58adb38.gif) | <img width="500" alt="검색 키워드 강조" src="https://user-images.githubusercontent.com/98381294/217151458-4e34f719-87df-4e17-8a0e-5c05ddde6e45.gif"> |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+|                                                             로그인                                                              |                                                                   관심 코인 등록                                                                   |
+| :---------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------: |
+| ![로그인 시연](https://user-images.githubusercontent.com/98381294/217151486-bb8e9eda-582e-4f26-8f40-762cd52abec2.gif) | <img width="500" alt="검색 키워드 강조" src="https://user-images.githubusercontent.com/98381294/217151488-7885ae2d-e204-4382-b476-d0f9e1d4a61a.gif"> |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+|                                                             다크모드                                                              |                                                                   검색 키워드 강조                                                                   |
+| :---------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------: |
+| ![다크모드 시연](https://user-images.githubusercontent.com/98381294/217151401-9dbc9033-d466-4a8d-8c74-88ddf58adb38.gif) | <img width="500" alt="검색 키워드 강조" src="https://user-images.githubusercontent.com/98381294/217151458-4e34f719-87df-4e17-8a0e-5c05ddde6e45.gif"> |
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<br>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## 추가 할 기능 🫠
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- 방명록
+- 리덕스
+- 코인 리스트 추가로 불러오기
