@@ -21,7 +21,7 @@ const Navbar = () => {
   return (
     <div className="flex items-center justify-between h-20 font-bold duration-300 rounded-div">
       <Link to="/">
-        <h1 className="text-2xl">코인잼</h1>
+        <h1 className="text-2xl">코인잼💸</h1>
       </Link>
       <div className="hidden md:block">
         <ThemeToggle />

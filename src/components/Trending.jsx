@@ -6,9 +6,14 @@ const Trending = () => {
   const url = "https://api.coingecko.com/api/v3/search/trending";
 
   useEffect(() => {
-    axios.get(url).then((response) => {
-      setTrending(response.data.coins);
-    });
+    axios
+      .get(url)
+      .then((response) => {
+        setTrending(response.data.coins);
+      })
+      .catch(() => {
+        alert("코인게코의 서버가 불안정합니다.");
+      });
   });
   return (
     <div className="rounded-div my-12 py-8 text-primary">

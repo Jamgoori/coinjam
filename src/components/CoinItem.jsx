@@ -28,12 +28,12 @@ const CoinItem = ({ coin }) => {
   };
   return (
     <tr className="h-[80px] border-b overflow-hidden">
-      <td onClick={saveCoin}>
+      <td onClick={saveCoin} className="text-xl hover:cursor-pointer">
         {savedCoin ? <AiFillStar /> : <AiOutlineStar />}
       </td>
       <td>{coin.market_cap_rank}</td>
       <td>
-        <Link to={`/coin/${coin.id}`}>
+        <Link to={`/coin/${coin.id}`} onClick={() => window.scrollTo(0, 0)}>
           <div className="flex item-center">
             <img
               className="w-6 mr-2 rounded-full"
