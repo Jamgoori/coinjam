@@ -11,7 +11,6 @@ const Coinpage = () => {
   useEffect(() => {
     axios.get(url).then((response) => {
       setCoin(response.data);
-      console.log(response.data);
     });
   }, [url]);
   return (

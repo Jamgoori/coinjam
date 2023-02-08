@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import CoinItem from "./CoinItem";
 const CoinSearch = ({ coins }) => {
   const [searchText, setSearchText] = useState("");
-  console.log(coins);
   return (
     <div className="my-4 rounded-div">
       <div className="flex flex-col justify-between pt-4 pb-6 text-center md:flex-row md:flex md:text-right">
@@ -28,7 +27,7 @@ const CoinSearch = ({ coins }) => {
             <th>24시간</th>
             <th className="hidden md:table-cell">24시간 거래량</th>
             <th className="hidden sm:table-cell">시가총액</th>
-            <th>7일 전</th>
+            <th>7일 그래프</th>
           </tr>
         </thead>
         <tbody>
