@@ -1,14 +1,19 @@
 import React from 'react'
-import CoinSearch from '../components/CoinSearch'
+import CoinSearch from '../components/template/CoinSearch'
 import GoToTop from '../components/template/GotoTop'
-import Trending from '../components/Trending'
+import Trending from '../components/template/Trending'
+
 const Home = ({ coins }) => {
   return (
-    <div>
+    <>
+      {/* <CoinSearch coins={coins} />
+      <Trending />
+      <GoToTop />
+       */}
       <CoinSearch coins={coins} />
       <Trending />
       <GoToTop />
-    </div>
+    </>
   )
 }
 

@@ -1,19 +1,19 @@
-import React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import SavedCoin from "../components/SavedCoin";
-import { UserAuth } from "../context/AuthContext";
+import React from 'react'
+import { Navigate, useNavigate } from 'react-router-dom'
+import SavedCoin from '../components/template/SavedCoin'
+import { UserAuth } from '../context/AuthContext'
 
 const Account = () => {
-  const { user, logout } = UserAuth();
-  const navigate = useNavigate();
+  const { user, logout } = UserAuth()
+  const navigate = useNavigate()
   const handleSignOut = async () => {
     try {
-      await logout();
-      navigate("/");
+      await logout()
+      navigate('/')
     } catch (e) {
-      console.log(e.message);
+      console.log(e.message)
     }
-  };
+  }
   if (user) {
     return (
       <div className="max-w-[1140px] mx-auto">
@@ -25,10 +25,7 @@ const Account = () => {
             </div>
           </div>
           <div>
-            <button
-              onClick={handleSignOut}
-              className="px-6 py-2 border shadow-lg rounded-2xl hover:shadow-2xl"
-            >
+            <button onClick={handleSignOut} className="px-6 py-2 border shadow-lg rounded-2xl hover:shadow-2xl">
               로그아웃
             </button>
           </div>
@@ -40,9 +37,9 @@ const Account = () => {
           </div>
         </div>
       </div>
-    );
+    )
   } else {
-    return <Navigate to="/siginin" />;
+    return <Navigate to="/siginin" />
   }
-};
-export default Account;
+}
+export default Account
