@@ -2,18 +2,22 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import ThemeToggle from '../atom/ThemeToggle'
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
-import { UserAuth } from '../../context/AuthContext'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout, selectUser } from '../../store/authStore'
+import { auth } from '../../firebase'
 
 const Navbar = () => {
   const [nav, setNav] = useState(false)
-  const { user, logout } = UserAuth()
+  const user = useSelector(selectUser)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const handleNav = () => {
     setNav(!nav)
   }
   const handleSignOut = async () => {
     try {
-      await logout()
+      dispatch(logout())
+      await auth.signOut()
       navigate('/')
     } catch (e) {
       console.log(e.message)
@@ -83,5 +87,4 @@ const Navbar = () => {
     </div>
   )
 }
-
 export default Navbar

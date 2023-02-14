@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { Sparklines, SparklinesLine } from 'react-sparklines'
 import { Link } from 'react-router-dom'
-import { UserAuth } from '../../context/AuthContext'
 import { db } from '../../firebase'
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../../store/authStore'
 
 const CoinItem = ({ coin }) => {
   const [savedCoin, setSavedCoin] = useState(false)
-  const { user } = UserAuth()
+  const user = useSelector(selectUser)
 
   const coinPath = doc(db, 'users', `${user?.email}`)
   const saveCoin = async () => {
@@ -64,5 +65,4 @@ const CoinItem = ({ coin }) => {
     </tr>
   )
 }
-
 export default CoinItem

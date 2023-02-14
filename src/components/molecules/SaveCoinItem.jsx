@@ -1,26 +1,62 @@
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { AiOutlineClose } from 'react-icons/ai'
-import React from 'react'
+import { doc, onSnapshot, updateDoc } from 'firebase/firestore'
+import { db } from '../../firebase'
+import SaveCoinItem from '../molecules/SaveCoinItem'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../../store/authStore'
 
-const SaveCoinItem = ({ rank, id, image, name, symbol, onClick }) => {
+const SavedCoin = () => {
+  const [coins, setCoins] = useState([])
+  const user = useSelector(selectUser)
+
+  useEffect(() => {
+    onSnapshot(doc(db, 'users', `${user?.email}`), (doc) => {
+      setCoins(doc.data()?.watchList)
+    })
+  }, [user?.email])
+  const coinPath = doc(db, 'users', `${user?.email}`)
+  const deleteCoin = async (passedid) => {
+    try {
+      const result = coins.filter((item) => item.id !== passedid)
+      await updateDoc(coinPath, {
+        watchList: result,
+      })
+    } catch (e) {
+      console.log(e.message)
+    }
+  }
   return (
-    <tr className="h-[60px] overflow-hidden">
-      <td>{rank}</td>
-      <td>
-        <Link to={`/coin/${id}`}>
-          <div className="flex items-center">
-            <img src={image} className="w-8 mr-4" alt="/" />
-            <div>
-              <p className="hidden sm:table-cell">{name}</p>
-              <p className="text-sm text-left text-gray-500">{symbol.toUpperCase()}</p>
-            </div>
-          </div>
-        </Link>
-      </td>
-      <td className="pl-8">
-        <AiOutlineClose onClick={onClick} className="cursor-pointer" />
-      </td>
-    </tr>
+    <div>
+      {coins.length === 0 ? (
+        <p>
+          저장된 코인이 없습니다. 관심 리스트에 코인을 추가하세요. <Link to="/">추가하러 가기</Link>
+        </p>
+      ) : (
+        <table className="w-full text-center border-collapse">
+          <thead>
+            <tr className="border-b">
+              <th className="px-4">Rank #</th>
+              <th className="text-left">코인</th>
+              <th className="text-left">삭제</th>
+            </tr>
+          </thead>
+          <tbody>
+            {coins.map((coin) => (
+              <SaveCoinItem
+                key={coin.id}
+                id={coin.id}
+                rank={coin.rank}
+                name={coin.name}
+                symbol={coin.symbol}
+                image={coin.image}
+                onClick={() => deleteCoin(coin.id)}
+              />
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
   )
 }
-export default SaveCoinItem
+export default SavedCoin
