@@ -1,26 +1,35 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { UserAuth } from '../context/AuthContext'
 import EmailInput from '../components/molecules/EmailInput'
 import PasswordInput from '../components/molecules/PasswordInput'
+import { useDispatch } from 'react-redux'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../firebase'
+import { login } from '../store/authStore'
 
 const Signin = () => {
-  const { signIn } = UserAuth()
+  const dispatch = useDispatch()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const navigate = useNavigate()
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
-    try {
-      await signIn(email, password)
-      navigate('/account')
-    } catch (e) {
-      setError(e.message)
-      console.log(e.message)
-    }
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userAuth) => {
+        dispatch(
+          login({
+            email: userAuth.user.email,
+            uid: userAuth.user.uid,
+          })
+        )
+        navigate('/account')
+      })
+      .catch((err) => {
+        setError(err.message)
+        alert(err)
+      })
   }
 
   return (
@@ -42,5 +51,4 @@ const Signin = () => {
     </div>
   )
 }
-
 export default Signin
