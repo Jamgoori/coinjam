@@ -1,25 +1,38 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { UserAuth } from '../context/AuthContext'
 import EmailInput from '../components/molecules/EmailInput'
 import PasswordInput from '../components/molecules/PasswordInput'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth, db } from '../firebase'
+import { useDispatch } from 'react-redux'
+import { login } from '../store/authStore'
+import { doc, setDoc } from 'firebase/firestore'
 
 const Signup = () => {
+  const dispatch = useDispatch()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const navigate = useNavigate()
-  const { signUp } = UserAuth()
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
-    try {
-      await signUp(email, password)
-      navigate('/')
-    } catch (e) {
-      setError(e.message)
-      console.log(e.message)
-    }
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userAuth) => {
+        setDoc(doc(db, 'users', email), {
+          watchList: [],
+        })
+        dispatch(
+          login({
+            email: userAuth.user.email,
+            uid: userAuth.user.uid,
+          })
+        )
+        navigate('/')
+      })
+      .catch((err) => {
+        alert(err)
+      })
   }
   return (
     <div>
@@ -41,5 +54,4 @@ const Signup = () => {
     </div>
   )
 }
-
 export default Signup
