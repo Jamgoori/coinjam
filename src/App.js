@@ -33,7 +33,7 @@ function App() {
         dispatch(logout())
       }
     })
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     getCoins()
