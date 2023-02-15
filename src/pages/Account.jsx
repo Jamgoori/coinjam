@@ -1,18 +1,18 @@
 import React from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import SavedCoin from '../components/template/SavedCoin'
-import { UserAuth } from '../context/AuthContext'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout, selectUser } from '../store/authStore'
+import { auth } from '../firebase'
 
 const Account = () => {
-  const { user, logout } = UserAuth()
+  const user = useSelector(selectUser)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const handleSignOut = async () => {
-    try {
-      await logout()
-      navigate('/')
-    } catch (e) {
-      console.log(e.message)
-    }
+    dispatch(logout())
+    await auth.signOut()
+    navigate('/')
   }
   if (user) {
     return (
