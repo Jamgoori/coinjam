@@ -32,7 +32,7 @@ const CommentItem = ({ comment, deleteHandler }) => {
         <div className="">
           <div className="flex justify-between">
             <h2 className="-mt-1 text-lg">{comment.creator.email}</h2>
-            {user.uid === comment.creator.uid ? <button onClick={deleteHandler}>삭제</button> : null}
+            {user && user.uid === comment.creator.uid ? <button onClick={deleteHandler}>삭제</button> : null}
           </div>
           <p className="text-sm">{comment.createdAt}</p>
           <p className="mt-3 text-m">{comment.comment}</p>
