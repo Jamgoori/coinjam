@@ -2,19 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { doc, onSnapshot, updateDoc } from 'firebase/firestore'
 import { db } from '../../firebase'
-import { UserAuth } from '../../context/AuthContext'
 import SaveCoinItem from '../molecules/SaveCoinItem'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../../store/authStore'
 
 const SavedCoin = () => {
   const [coins, setCoins] = useState([])
-  const { user } = UserAuth()
+  const user = useSelector(selectUser)
 
   useEffect(() => {
     onSnapshot(doc(db, 'users', `${user?.email}`), (doc) => {
       setCoins(doc.data()?.watchList)
     })
   }, [user?.email])
-
   const coinPath = doc(db, 'users', `${user?.email}`)
   const deleteCoin = async (passedid) => {
     try {
@@ -28,7 +28,7 @@ const SavedCoin = () => {
   }
   return (
     <div>
-      {coins.length === 0 ? (
+      {coins & (coins.length === 0) ? (
         <p>
           저장된 코인이 없습니다. 관심 리스트에 코인을 추가하세요. <Link to="/">추가하러 가기</Link>
         </p>
@@ -44,6 +44,7 @@ const SavedCoin = () => {
           <tbody>
             {coins.map((coin) => (
               <SaveCoinItem
+                key={coin.id}
                 id={coin.id}
                 rank={coin.rank}
                 name={coin.name}
@@ -58,5 +59,4 @@ const SavedCoin = () => {
     </div>
   )
 }
-
 export default SavedCoin

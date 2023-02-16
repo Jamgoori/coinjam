@@ -3,6 +3,7 @@ import DOMPurify from 'dompurify'
 import { useParams } from 'react-router-dom'
 import { getFindCoin } from '../queries/getFindCoin'
 import CoinDetail from '../components/template/CoinDetail'
+import CoinComment from '../components/template/CoinComment'
 
 const Coinpage = () => {
   const [coin, setCoin] = useState({})
@@ -33,6 +34,7 @@ const Coinpage = () => {
           }}
         ></p>
       </div>
+      <CoinComment />
     </div>
   )
 }
