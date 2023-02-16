@@ -3,11 +3,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import EmailInput from '../components/molecules/EmailInput'
 import PasswordInput from '../components/molecules/PasswordInput'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { auth, db } from '../firebase'
+import { auth, CollectionName, db } from '../firebase'
 import { useDispatch } from 'react-redux'
 import { login } from '../store/authStore'
 import { doc, setDoc } from 'firebase/firestore'
-
 const Signup = () => {
   const dispatch = useDispatch()
   const [email, setEmail] = useState('')
@@ -17,9 +16,10 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
+    const authDoc = doc(db, CollectionName.USER, email)
     createUserWithEmailAndPassword(auth, email, password)
       .then((userAuth) => {
-        setDoc(doc(db, 'users', email), {
+        setDoc(authDoc, {
           watchList: [],
         })
         dispatch(
