@@ -2,12 +2,15 @@ import React, { useState } from 'react'
 import { useSelectUser } from '../../store/authStore'
 import { CollectionName, db } from '../../firebase'
 import { doc, updateDoc } from 'firebase/firestore'
-
 const CommentItem = ({ comment, deleteHandler }) => {
   const [like, setLike] = useState(comment.like)
   const [dislike, setDislike] = useState(comment.dislike)
   const user = useSelectUser()
   const likeHandler = async () => {
+    if (!user) {
+      alert('로그인 필요')
+      return
+    }
     // 원하는 데이터 가져옴
     const commentDoc = doc(db, CollectionName.COMMENT, comment.id)
     try {
@@ -18,6 +21,10 @@ const CommentItem = ({ comment, deleteHandler }) => {
     }
   }
   const dislikeHandler = async () => {
+    if (!user) {
+      alert('로그인 필요')
+      return
+    }
     const commentDoc = doc(db, CollectionName.COMMENT, comment.id)
     try {
       await updateDoc(commentDoc, { dislike: dislike + 1 })
