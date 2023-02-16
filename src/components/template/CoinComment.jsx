@@ -1,53 +1,75 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import dayjs from 'dayjs'
-import { addDoc, collection, getDocs, query, where } from 'firebase/firestore'
-import { db } from '../../firebase'
 import CommentBox from '../atom/CommentBox'
+import { useSelectUser } from '../../store/authStore'
+import { useParams } from 'react-router-dom'
+import { addDoc, collection, deleteDoc, doc, getDocs, query, where } from 'firebase/firestore'
+import { CollectionName, db } from '../../firebase'
+import dayjs from 'dayjs'
 import CommentItem from '../molecules/comentItem'
-import { selectUser } from '../../store/authStore'
 
 const CoinComment = ({ coin }) => {
   const [value, setValue] = useState('')
   const [comments, setComments] = useState([])
-  const user = useSelector(selectUser)
+  const user = useSelectUser()
   const params = useParams()
+
+  // 댓글 저장
   const saveComment = async (e) => {
     e.preventDefault()
     if (!user) {
       alert('로그인 필요')
       return
     }
-    const newComment = {
+    const saveCommentData = {
       comment: value,
       createdAt: dayjs().format('YYYY-MM-DD'),
-      coinId: params.coinId,
+      coinId: params.coinId, //coin.id
       like: 0,
       dislike: 0,
       creator: user,
     }
-    const docRef = await addDoc(collection(db, 'comments'), newComment)
-    setComments([...comments, { id: docRef.id, ...newComment }])
+    const data = await addDoc(collection(db, 'comments'), saveCommentData)
     setValue('')
+    setComments((prev) => [...prev, { id: data.id, ...saveCommentData }])
   }
-  const getComments = useCallback(async () => {
-    const q = query(collection(db, 'comments'), where('coinId', '==', params.coinId))
-    const querySnapshot = await getDocs(q)
-    const commentData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+  // 댓글 삭제
+  const deleteHandler = async (id) => {
+    const commentDoc = doc(db, CollectionName.COMMENT, id)
+    try {
+      await deleteDoc(commentDoc)
+      setComments((prev) => [...prev.filter((comment) => comment.id !== id)])
+    } catch (e) {
+      console.log(e)
+    }
+  }
+  // 댓글 초기값 세팅
+  const getComment = useCallback(async () => {
+    const q = await query(collection(db, 'comments'), where('coinId', '==', params.coinId))
+    const data = await getDocs(q)
+    const newData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+    const commentData = newData.map((comment) => {
+      return {
+        id: comment.id,
+        comment: comment.comment,
+        createdAt: comment.createdAt,
+        coinId: comment.coinId,
+        like: comment.like,
+        dislike: comment.dislike,
+        creator: comment.creator,
+      }
+    })
     setComments(commentData)
   }, [params])
   useEffect(() => {
-    getComments()
-  }, [getComments, params.coinId])
+    getComment()
+  }, [getComment])
   return (
     <div className="py-8 my-4 rounded-div">
-      {comments.map((comment) => (
-        <CommentItem key={comment.id} comment={comment} />
+      {comments.map((comment, index) => (
+        <CommentItem key={index} comment={comment} deleteHandler={() => deleteHandler(comment.id)} />
       ))}
       <CommentBox onSubmit={saveComment} value={value} onChange={(e) => setValue(e.target.value)} />
     </div>
   )
 }
-
 export default CoinComment
