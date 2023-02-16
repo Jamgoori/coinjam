@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { useSelector } from 'react-redux'
 
 const authSlice = createSlice({
   name: 'auth',
@@ -15,5 +16,6 @@ const authSlice = createSlice({
   },
 })
 export const selectUser = (state) => state.auth.user
+export const useSelectUser = () => useSelector(selectUser)
 export const { login, logout } = authSlice.actions
 export default authSlice.reducer
