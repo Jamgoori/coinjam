@@ -54,6 +54,12 @@ PW: qwe123
 
 <br>
 
+## 업데이트 과정
+
+- https://jamgul.tistory.com/category/%EC%BD%94%EC%9D%B8%EC%9E%BC
+
+<br>
+
 ## 업데이트 목록
 
 v1.01
@@ -72,4 +78,22 @@ v1.02
 
 <br>
 v1.03
+
 - 주요기능 Redux Toolkit으로 리팩토링
+
+<br>
+v1.04
+
+- useEffect dependency 추가
+- CoinDetail 컴포넌트화
+<br>
+
+v1.05
+
+- 코인정보 댓글 기능 추가
+- 좋아요, 싫어요, 삭제기능 추가
+- Route 관련 리팩토링
+<br>
+v1.06
+
+- 방명록 관리 스토어 추가
