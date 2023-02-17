@@ -4,6 +4,7 @@ import SavedCoin from '../components/template/SavedCoin'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout, selectUser } from '../store/authStore'
 import { auth } from '../firebase'
+import { PAGE_ROUTES } from '../constants/Routes'
 
 const Account = () => {
   const user = useSelector(selectUser)
@@ -39,7 +40,7 @@ const Account = () => {
       </div>
     )
   } else {
-    return <Navigate to="/siginin" />
+    return <Navigate to={PAGE_ROUTES.SIGNIN} />
   }
 }
 export default Account

@@ -13,11 +13,11 @@ import { useDispatch } from 'react-redux'
 import { login, logout } from './store/authStore'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './firebase'
+import { PAGE_ROUTES } from './constants/Routes'
 
 function App() {
   const dispatch = useDispatch()
   const [coins, setCoins] = useState([])
-
   // page load 때 user 체크
   useEffect(() => {
     onAuthStateChanged(auth, (userAuth) => {
@@ -34,7 +34,6 @@ function App() {
       }
     })
   }, [dispatch])
-
   useEffect(() => {
     getCoins()
       .then((response) => {
@@ -45,16 +44,16 @@ function App() {
         alert('코인게코의 서버가 불안정합니다.')
       })
   }, [])
-
   return (
     <ThemeProvider>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home coins={coins} />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/coin/:coinId" element={<Coinpage />}>
+        <Route path={PAGE_ROUTES.SIGNIN} element={<Signin />} />
+        <Route path={PAGE_ROUTES.SIGNUP} element={<Signup />} />
+        <Route path={PAGE_ROUTES.ACCOUNT} element={<Account />} />
+        {/*<Route path={PAGE_ROUTES.VISITOR} element={<Visitors />} />*/}
+        <Route path={`${PAGE_ROUTES.COIN}/:coinId`} element={<Coinpage />}>
           <Route path=":coinId" />
         </Route>
       </Routes>

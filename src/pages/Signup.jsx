@@ -7,6 +7,8 @@ import { auth, CollectionName, db } from '../firebase'
 import { useDispatch } from 'react-redux'
 import { login } from '../store/authStore'
 import { doc, setDoc } from 'firebase/firestore'
+import { PAGE_ROUTES } from '../constants/Routes'
+
 const Signup = () => {
   const dispatch = useDispatch()
   const [email, setEmail] = useState('')
@@ -46,7 +48,7 @@ const Signup = () => {
         </form>
         <p className="my-4">
           이미 계정이 있으신가요?{' '}
-          <Link to="/signin" className="text-accent">
+          <Link to={PAGE_ROUTES.SIGNIN} className="text-accent">
             로그인
           </Link>
         </p>

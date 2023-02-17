@@ -5,6 +5,7 @@ import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout, selectUser } from '../../store/authStore'
 import { auth } from '../../firebase'
+import { PAGE_ROUTES } from '../../constants/Routes'
 
 const Navbar = () => {
   const [nav, setNav] = useState(false)
@@ -33,17 +34,26 @@ const Navbar = () => {
       </div>
       {user?.email ? (
         <div>
-          <Link to="/account" className="p-4">
+          <Link to={PAGE_ROUTES.VISITOR} className="p-4">
+            방명록
+          </Link>
+          <Link to={PAGE_ROUTES.ACCOUNT} className="p-4">
             내 정보
           </Link>
           <button onClick={handleSignOut}>로그아웃</button>
         </div>
       ) : (
         <div className="hidden md:block">
-          <Link to="/signin" className="p-4 hover:text-accent">
+          <Link to={PAGE_ROUTES.VISITOR} className="p-4 hover:text-accent">
+            방명록
+          </Link>
+          <Link to={PAGE_ROUTES.SIGNIN} className="p-4 hover:text-accent">
             로그인
           </Link>
-          <Link to="/signup" className="px-5 py-2 ml-2 shadow-lg bg-button text-btnText rounded-2xl hover:shadow-2xl">
+          <Link
+            to={PAGE_ROUTES.SIGNUP}
+            className="px-5 py-2 ml-2 shadow-lg bg-button text-btnText rounded-2xl hover:shadow-2xl"
+          >
             회원가입
           </Link>
         </div>
@@ -64,14 +74,25 @@ const Navbar = () => {
             <Link to="/">홈페이지</Link>
           </li>
           <li onClick={handleNav} className="py-6 border-b">
-            <Link to="/account">계정</Link>
+            <Link to={PAGE_ROUTES.VISITOR}>방명록</Link>
+          </li>
+          <li onClick={handleNav} className="py-6 border-b">
+            <Link to={PAGE_ROUTES.ACCOUNT}>계정</Link>
           </li>
           <li className="py-6 border-b">
             <ThemeToggle />
           </li>
         </ul>
         <div className="flex flex-col w-full p-4">
-          <Link to="/signin">
+          <Link to={PAGE_ROUTES.VISITOR}>
+            <button
+              onClick={handleNav}
+              className="w-full p-3 my-2 border shadow-xl bg-primary text-primary border-secondary rounded-2xl"
+            >
+              방명록
+            </button>
+          </Link>
+          <Link to={PAGE_ROUTES.SIGNIN}>
             <button
               onClick={handleNav}
               className="w-full p-3 my-2 border shadow-xl bg-primary text-primary border-secondary rounded-2xl"
@@ -79,7 +100,7 @@ const Navbar = () => {
               로그인
             </button>
           </Link>
-          <Link onClick={handleNav} to="/signup">
+          <Link onClick={handleNav} to={PAGE_ROUTES.SIGNUP}>
             <button>회원가입</button>
           </Link>
         </div>

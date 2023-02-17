@@ -6,13 +6,11 @@ import { addDoc, collection, deleteDoc, doc, getDocs, query, where } from 'fireb
 import { CollectionName, db } from '../../firebase'
 import dayjs from 'dayjs'
 import CommentItem from '../molecules/comentItem'
-
 const CoinComment = ({ coin }) => {
   const [value, setValue] = useState('')
   const [comments, setComments] = useState([])
   const user = useSelectUser()
   const params = useParams()
-
   // 댓글 저장
   const saveComment = async (e) => {
     e.preventDefault()
@@ -20,6 +18,7 @@ const CoinComment = ({ coin }) => {
       alert('로그인 필요')
       return
     }
+    //TODO coin 데이터가 잘안들어와 param의 coin id를 사용 중
     const saveCommentData = {
       comment: value,
       createdAt: dayjs().format('YYYY-MM-DD'),
@@ -28,7 +27,7 @@ const CoinComment = ({ coin }) => {
       dislike: 0,
       creator: user,
     }
-    const data = await addDoc(collection(db, 'comments'), saveCommentData)
+    const data = await addDoc(collection(db, CollectionName.COMMENT), saveCommentData)
     setValue('')
     setComments((prev) => [...prev, { id: data.id, ...saveCommentData }])
   }
@@ -44,7 +43,7 @@ const CoinComment = ({ coin }) => {
   }
   // 댓글 초기값 세팅
   const getComment = useCallback(async () => {
-    const q = await query(collection(db, 'comments'), where('coinId', '==', params.coinId))
+    const q = await query(collection(db, CollectionName.COMMENT), where('coinId', '==', params.coinId))
     const data = await getDocs(q)
     const newData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
     const commentData = newData.map((comment) => {

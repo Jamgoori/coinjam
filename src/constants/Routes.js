@@ -5,3 +5,11 @@ export const API_ROUTES = {
   TRENDING: 'https://api.coingecko.com/api/v3/search/trending',
   FIND: (id) => `https://api.coingecko.com/api/v3/coins/${id}?localization=false&sparkline=true`,
 }
+
+export const PAGE_ROUTES = {
+  VISITOR: '/visitors',
+  ACCOUNT: '/account',
+  SIGNIN: '/signin',
+  SIGNUP: '/signup',
+  COIN: '/coin',
+}

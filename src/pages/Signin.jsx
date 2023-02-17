@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../firebase'
 import { login } from '../store/authStore'
+import { PAGE_ROUTES } from '../constants/Routes'
 
 const Signin = () => {
   const dispatch = useDispatch()
@@ -31,7 +32,6 @@ const Signin = () => {
         alert(err)
       })
   }
-
   return (
     <div>
       <div className="max-w-[400px] mx-auto min-h-[600px] px-4 py-20">
@@ -43,7 +43,7 @@ const Signin = () => {
         </form>
         <p className="my-4">
           계정이 없으신가요?{' '}
-          <Link to="/signup" className="text-accent">
+          <Link to={PAGE_ROUTES.SIGNUP} className="text-accent">
             회원가입
           </Link>
         </p>
