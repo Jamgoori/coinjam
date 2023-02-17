@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { doc, onSnapshot, updateDoc } from 'firebase/firestore'
-import { db } from '../../firebase'
+import { CollectionName, db } from '../../firebase'
 import SaveCoinItem from '../molecules/SaveCoinItem'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../store/authStore'
-
 const SavedCoin = () => {
   const [coins, setCoins] = useState([])
   const user = useSelector(selectUser)
 
   useEffect(() => {
-    onSnapshot(doc(db, 'users', `${user?.email}`), (doc) => {
+    onSnapshot(doc(db, CollectionName.USER, `${user?.email}`), (doc) => {
       setCoins(doc.data()?.watchList)
     })
   }, [user?.email])
-  const coinPath = doc(db, 'users', `${user?.email}`)
+
+  const coinPath = doc(db, CollectionName.USER, `${user?.email}`)
   const deleteCoin = async (passedid) => {
     try {
       const result = coins.filter((item) => item.id !== passedid)
@@ -28,7 +28,7 @@ const SavedCoin = () => {
   }
   return (
     <div>
-      {coins & (coins.length === 0) ? (
+      {coins.length === 0 ? (
         <p>
           저장된 코인이 없습니다. 관심 리스트에 코인을 추가하세요. <Link to="/">추가하러 가기</Link>
         </p>
