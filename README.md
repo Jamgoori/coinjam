@@ -23,9 +23,11 @@ PW: qwe123
 
 ## 코인잼 💸
 
-<img width="800" alt="클래스다이어그램" src="https://user-images.githubusercontent.com/98381294/217152319-2db7b938-3fbb-440e-8b57-0e1ea09c4089.gif">
+<img width="800" src="https://user-images.githubusercontent.com/98381294/217152319-2db7b938-3fbb-440e-8b57-0e1ea09c4089.gif">
 
 <br>
+
+
 
 ## 구현기능 🦾
 
@@ -39,10 +41,11 @@ PW: qwe123
 | ![로그인 시연](https://user-images.githubusercontent.com/98381294/217151486-bb8e9eda-582e-4f26-8f40-762cd52abec2.gif) | <img   src="https://user-images.githubusercontent.com/98381294/217151488-7885ae2d-e204-4382-b476-d0f9e1d4a61a.gif"> |
 
 
-|                                                             다크모드                                                              |                                                                   검색 키워드 강조                                                                   |
+|                                                             반응형 모드                                                              |                                                                   주목받는 코인                                                                   |
 | :---------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------: |
-| ![다크모드 시연](https://user-images.githubusercontent.com/98381294/217151401-9dbc9033-d466-4a8d-8c74-88ddf58adb38.gif) | <img src="https://user-images.githubusercontent.com/98381294/217151458-4e34f719-87df-4e17-8a0e-5c05ddde6e45.gif"> |
+| <img src="https://user-images.githubusercontent.com/98381294/219626413-0420a9df-a1bf-40f4-bcbb-250bb61849b1.gif"> | <img src="https://user-images.githubusercontent.com/98381294/217151489-8ea98a4d-dcbc-4a81-8a54-e46afda0d92e.PNG"> |
 
+|                                                                                                                        | 
 
 
 <br>
