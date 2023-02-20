@@ -11,6 +11,10 @@ const CommentItem = ({ comment, deleteHandler }) => {
       alert('로그인 필요')
       return
     }
+    // 자기글의 좋아요 이벤트 무시
+    if (user.uid === comment.creator.uid) {
+      return
+    }
     // 원하는 데이터 가져옴
     const commentDoc = doc(db, CollectionName.COMMENT, comment.id)
     try {
@@ -25,6 +29,10 @@ const CommentItem = ({ comment, deleteHandler }) => {
       alert('로그인 필요')
       return
     }
+    // 자기글의 싫어요 이벤트 무시
+    if (user.uid === comment.creator.uid) {
+      return
+    }
     const commentDoc = doc(db, CollectionName.COMMENT, comment.id)
     try {
       await updateDoc(commentDoc, { dislike: dislike + 1 })
@@ -34,21 +42,21 @@ const CommentItem = ({ comment, deleteHandler }) => {
     }
   }
   return (
-    <div className="mx-4 my-10 rounded-lg shadow-lg">
+    <div className="shadow-lg rounded-lg mx-4 my-10">
       <div className="px-4 py-6">
         <div className="">
           <div className="flex justify-between">
-            <h2 className="-mt-1 text-lg">{comment.creator.email}</h2>
+            <h2 className="text-lg -mt-1">{comment.creator.email}</h2>
             {user && user.uid === comment.creator.uid ? <button onClick={deleteHandler}>삭제</button> : null}
           </div>
           <p className="text-sm">{comment.createdAt}</p>
           <p className="mt-3 text-m">{comment.comment}</p>
-          <div className="flex items-end justify-end mt-4">
-            <div className="flex mr-2 mr-3 text-sm cursor-pointer" onClick={likeHandler}>
+          <div className="mt-4 flex justify-end items-end">
+            <div className="flex mr-2 text-sm mr-3 cursor-pointer" onClick={likeHandler}>
               <div>❤️</div>
               <span>{like}</span>
             </div>
-            <div className="flex mr-2 mr-3 text-sm cursor-pointer" onClick={dislikeHandler}>
+            <div className="flex mr-2 text-sm mr-3 cursor-pointer" onClick={dislikeHandler}>
               <div>💔</div>
               <span>{dislike}</span>
             </div>

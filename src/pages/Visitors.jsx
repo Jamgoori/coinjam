@@ -14,7 +14,6 @@ import {
 } from '../store/visitorStore'
 import { useDispatch } from 'react-redux'
 import VisitorItem from '../components/molecules/VisitorItem'
-
 const Visitors = () => {
   const user = useSelectUser()
   const visitorSelect = useSelectVisitor()
@@ -42,6 +41,10 @@ const Visitors = () => {
       alert('로그인 필요')
       return
     }
+    // 자기글의 좋아요 이벤트 무시
+    if (user.uid === visitor.creator.uid) {
+      return
+    }
     // 원하는 데이터 가져옴
     const visitorDoc = doc(db, CollectionName.VISITOR, visitor.id)
     try {
@@ -54,6 +57,10 @@ const Visitors = () => {
   const dislikeHandler = async (visitor) => {
     if (!user) {
       alert('로그인 필요')
+      return
+    }
+    // 자기글의 싫어요 이벤트 무시
+    if (user.uid === visitor.creator.uid) {
       return
     }
     const visitorDoc = doc(db, CollectionName.VISITOR, visitor.id)
@@ -92,7 +99,6 @@ const Visitors = () => {
   useEffect(() => {
     getVisitors()
   }, [getVisitors])
-
   return (
     <div className="py-8 my-4 rounded-div">
       {visitorSelect.map((visitor, index) => {
@@ -110,5 +116,4 @@ const Visitors = () => {
     </div>
   )
 }
-
 export default Visitors
