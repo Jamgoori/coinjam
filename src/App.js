@@ -14,6 +14,7 @@ import { login, logout } from './store/authStore'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './firebase'
 import { PAGE_ROUTES } from './constants/Routes'
+import Visitors from './pages/Visitors'
 
 function App() {
   const dispatch = useDispatch()
@@ -52,7 +53,7 @@ function App() {
         <Route path={PAGE_ROUTES.SIGNIN} element={<Signin />} />
         <Route path={PAGE_ROUTES.SIGNUP} element={<Signup />} />
         <Route path={PAGE_ROUTES.ACCOUNT} element={<Account />} />
-        {/*<Route path={PAGE_ROUTES.VISITOR} element={<Visitors />} />*/}
+        <Route path={PAGE_ROUTES.VISITOR} element={<Visitors />} />
         <Route path={`${PAGE_ROUTES.COIN}/:coinId`} element={<Coinpage />}>
           <Route path=":coinId" />
         </Route>
