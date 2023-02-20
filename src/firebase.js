@@ -25,4 +25,5 @@ export default app
 export const CollectionName = {
   USER: 'users',
   COMMENT: 'comments',
+  VISITOR: 'visitors',
 }
